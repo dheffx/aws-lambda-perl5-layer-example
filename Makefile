@@ -1,5 +1,6 @@
 .PHONY: clean build
 
+FUNC_NAME ?= simple
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 CONTAINER_BASE_DIR := /tmp/func
 
@@ -16,8 +17,8 @@ ifndef CONTAINER_TAG
 endif
 	docker run --rm \
 		-v $(ROOT_DIR):$(CONTAINER_BASE_DIR) \
+		-e FUNC_NAME=$(FUNC_NAME) \
 		-e TAG=$(CONTAINER_TAG) \
-		-e BASE_DIR=$(CONTAINER_BASE_DIR) \
-		moznion/lambda-perl-layer-foundation:$(CONTAINER_TAG) \
+		-e BASE_DIR=$(CONTAINER_BASE_DIR)/$(FUNC_NAME) \
+		$(DOCKER_HUB)lambda-perl-layer-foundation:$(CONTAINER_TAG) \
 		$(CONTAINER_BASE_DIR)/build.sh
-

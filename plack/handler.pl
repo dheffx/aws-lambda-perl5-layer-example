@@ -4,9 +4,8 @@ use strict;
 use warnings;
 use utf8;
 use bytes ();
-use FindBin;
 
-my $app = require "$FindBin::Bin/app.psgi";
+my $app = require "$ENV{LAMBDA_TASK_ROOT}/app.psgi";
 
 sub handle {
     my ($payload) = @_;
@@ -22,9 +21,6 @@ sub handle {
         CONTENT_LENGTH => bytes::length($body) || 0,
         CONTENT_TYPE => $payload->{content_type} || '',
     });
-    use Data::Dumper; warn Dumper($resp); # TODO remove
-
-    return $resp;
 }
 
 1;
