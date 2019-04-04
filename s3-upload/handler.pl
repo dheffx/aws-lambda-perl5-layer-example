@@ -41,7 +41,7 @@ sub handle {
   
   print STDERR "Received:\n$get_result->{Body}";
   
-  my $processed_data = $get_result->{Body} . "\nprocessed";
+  my $processed_data = $get_result->{Body} . "\nprocessed by Perl FaaS!";
   my $put_result = $s3->PutObject(
     Bucket => $bucket,
     Key => $dest_key,
