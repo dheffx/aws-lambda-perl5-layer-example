@@ -32,7 +32,7 @@ sub handle {
   my $key = substr($source_key, length($source_key_prefix));
   my $dest_key = "$dest_key_prefix$key";
   
-  print STDERR "Processing upload to $bucket: $source_key | $key";
+  print STDERR "Processing upload to $bucket: $source_key | $key\n";
   
   my $get_result = $s3->GetObject(
     Bucket => $bucket,
