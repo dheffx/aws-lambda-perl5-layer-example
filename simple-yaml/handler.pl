@@ -10,7 +10,8 @@ sub handle {
 
     # parse YAML
     my $obj = YAML::XS::Load($payload->{'yaml'});
-    use Data::Dumper; warn Dumper($obj);
+    use Data::Dumper;
+    print STDERR Dumper($obj);
 
     return $obj;
 }
